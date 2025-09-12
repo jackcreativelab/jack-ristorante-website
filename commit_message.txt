@@ -1,0 +1,8 @@
+revert(i18n): Suppression de la fonctionnalité de traduction automatique
+
+Annulation de l'intégration de la fonctionnalité de traduction automatique
+suite à des problèmes de configuration persistants avec `next-intl` et à la
+demande de l'utilisateur.
+
+Le site a été restauré à son état précédent, incluant la fonctionnalité
+de lightbox et les filtres alimentaires.
