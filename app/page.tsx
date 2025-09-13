@@ -25,7 +25,7 @@ const menuData = {
       description: "Sélection de charcuteries italiennes, fromages affinés, olives et légumes marinés",
       price: "18€",
       allergens: ["dairy"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/antipasto-catering-platter-with-bacon-jerky-sausage-blue-cheese-grapes-wooden-table-top-view.jpg`,
+            image: "/antipasto-catering-platter-with-bacon-jerky-sausage-blue-cheese-grapes-wooden-table-top-view.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -34,7 +34,7 @@ const menuData = {
       description: "Burrata crémeuse servie avec tomates cerises, roquette et huile d'olive extra vierge",
       price: "16€",
       allergens: ["dairy"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/top-view-mozzarella-cherry-tomatoes-wooden-table.jpg`,
+            image: "/top-view-mozzarella-cherry-tomatoes-wooden-table.jpg",
       vegetarian: true,
       vegan: false,
     },
@@ -43,7 +43,7 @@ const menuData = {
       description: "Fines tranches de bœuf cru, copeaux de parmesan, roquette et citron",
       price: "22€",
       allergens: ["dairy"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/top-view-basturma-meat-plate-with-arugula-parmesan-cheese.jpg`,
+            image: "/top-view-basturma-meat-plate-with-arugula-parmesan-cheese.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -52,7 +52,7 @@ const menuData = {
       description: "Veau froid tranché finement, sauce au thon et câpres",
       price: "20€",
       allergens: ["eggs", "seafood"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/top-view-chicken-with-cheese-platter-dark-table.jpg`,
+            image: "/top-view-chicken-with-cheese-platter-dark-table.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -63,7 +63,7 @@ const menuData = {
       description: "Spaghetti aux palourdes fraîches, ail, persil et vin blanc",
       price: "24€",
       allergens: ["gluten", "seafood"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/tasty-appetizing-fresh-homemade-clams-alle-vongole-seafood-pasta-with-garlic-white-wine-plate-closeup.jpg`,
+            image: "/tasty-appetizing-fresh-homemade-clams-alle-vongole-seafood-pasta-with-garlic-white-wine-plate-closeup.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -72,7 +72,7 @@ const menuData = {
       description: "Risotto crémeux aux cèpes, parmesan vieilli et truffe noire",
       price: "28€",
       allergens: ["dairy"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/buckwheat-porridge-with-mushrooms.jpg`,
+      image: "/buckwheat-porridge-with-mushrooms.jpg",
       vegetarian: true,
       vegan: false,
     },
@@ -81,7 +81,7 @@ const menuData = {
       description: "Pâtes fraîches à la sauce de sanglier braisé et herbes de Toscane",
       price: "26€",
       allergens: ["gluten", "eggs"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/tasty-fettuccine-pasta-dish-topped-with-grated-cheese-white-plate.jpg`,
+      image: "/tasty-fettuccine-pasta-dish-topped-with-grated-cheese-white-plate.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -90,7 +90,7 @@ const menuData = {
       description: "Gnocchi de pommes de terre, sauce tomate, mozzarella et basilic",
       price: "22€",
       allergens: ["gluten", "dairy", "eggs"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/plate-gnocchi-pasta-tomato-sauce-with-fresh-basil-leaves.jpg`,
+      image: "/plate-gnocchi-pasta-tomato-sauce-with-fresh-basil-leaves.jpg",
       vegetarian: true,
       vegan: false,
     },
@@ -101,7 +101,7 @@ const menuData = {
       description: "Jarret de veau braisé, risotto au safran et gremolata",
       price: "42€",
       allergens: ["dairy"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/fried-chicken-breast-sauce-with-parmesan.jpg`,
+      image: "/fried-chicken-breast-sauce-with-parmesan.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -110,7 +110,7 @@ const menuData = {
       description: "Bar en croûte de sel, légumes de saison et huile aux herbes",
       price: "38€",
       allergens: ["seafood"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/raw-fish-composition-cooking.jpg`,
+      image: "/raw-fish-composition-cooking.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -119,7 +119,7 @@ const menuData = {
       description: "Côte de bœuf grillée (pour 2 personnes), roquette et tomates cerises",
       price: "85€",
       allergens: [],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/high-angle-steak-with-cutlery-salad.jpg`,
+      image: "/high-angle-steak-with-cutlery-salad.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -128,7 +128,7 @@ const menuData = {
       description: "Escalopes de veau au citron, épinards sautés à l'ail",
       price: "32€",
       allergens: ["dairy"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/seared-tuna-fork-close-up.jpg`,
+      image: "/seared-tuna-fork-close-up.jpg",
       vegetarian: false,
       vegan: false,
     },
@@ -139,7 +139,7 @@ const menuData = {
       description: "Notre tiramisu signature aux biscuits imbibés d'espresso et mascarpone",
       price: "14€",
       allergens: ["gluten", "dairy", "eggs"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/high-angle-tiramisu-small-jar.jpg`,
+      image: "/high-angle-tiramisu-small-jar.jpg",
       vegetarian: true,
       vegan: false,
     },
@@ -148,7 +148,7 @@ const menuData = {
       description: "Panna cotta vanille, coulis de fruits rouges et biscotti",
       price: "12€",
       allergens: ["dairy", "gluten"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/sangria-senorial-V7-dIKURxK4-unsplash.jpg`,
+      image: "/sangria-senorial-V7-dIKURxK4-unsplash.jpg",
       vegetarian: true,
       vegan: false,
     },
@@ -157,7 +157,7 @@ const menuData = {
       description: "Cannoli croustillants fourrés à la ricotta et pépites de chocolat",
       price: "13€",
       allergens: ["gluten", "dairy", "eggs"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/karly-gomez-lK1Q5RyD6tc-unsplash.jpg`,
+      image: "/karly-gomez-lK1Q5RyD6tc-unsplash.jpg",
       vegetarian: true,
       vegan: false,
     },
@@ -166,7 +166,7 @@ const menuData = {
       description: "Sélection de glaces artisanales (vanille, pistache, stracciatella)",
       price: "10€",
       allergens: ["dairy", "nuts"],
-      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/rimsha-noor-p6-O0Cc5RAc-unsplash.jpg`,
+      image: "/rimsha-noor-p6-O0Cc5RAc-unsplash.jpg",
       vegetarian: true,
       vegan: false,
     },
@@ -385,7 +385,7 @@ export default function HomePage() {
                           setCurrentIndex(dishIndex);
                           setOpen(true);
                         }}
-                        src={dish.image}
+                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -433,7 +433,7 @@ export default function HomePage() {
                           setCurrentIndex(dishIndex);
                           setOpen(true);
                         }}
-                        src={dish.image}
+                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -481,7 +481,7 @@ export default function HomePage() {
                           setCurrentIndex(dishIndex);
                           setOpen(true);
                         }}
-                        src={dish.image}
+                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -529,7 +529,7 @@ export default function HomePage() {
                           setCurrentIndex(dishIndex);
                           setOpen(true);
                         }}
-                        src={dish.image}
+                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -628,19 +628,19 @@ export default function HomePage() {
                 name: "Risotto ai Porcini",
                 description: "Riz Arborio crémeux aux cèpes sauvages et Parmigiano-Reggiano vieilli",
                 price: "28€",
-                image: `${process.env.NEXT_PUBLIC_BASE_PATH}/buckwheat-porridge-with-mushrooms.jpg`,
+                image: "/buckwheat-porridge-with-mushrooms.jpg",
               },
               {
                 name: "Osso Buco alla Milanese",
                 description: "Jarret de veau braisé lentement avec risotto au safran et gremolata",
                 price: "42€",
-                image: `${process.env.NEXT_PUBLIC_BASE_PATH}/fried-chicken-breast-sauce-with-parmesan.jpg`,
+                image: "/fried-chicken-breast-sauce-with-parmesan.jpg",
               },
               {
                 name: "Tiramisu della Casa",
                 description: "Notre tiramisu signature aux biscuits imbibés d'espresso et mascarpone",
                 price: "14€",
-                image: `${process.env.NEXT_PUBLIC_BASE_PATH}/high-angle-tiramisu-small-jar.jpg`,
+                image: "/high-angle-tiramisu-small-jar.jpg",
               },
             ].map((dish, index) => (
               <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-card">
@@ -651,7 +651,7 @@ export default function HomePage() {
                       setCurrentIndex(dishIndex);
                       setOpen(true);
                     }}
-                    src={dish.image}
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
                     alt={dish.name}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
