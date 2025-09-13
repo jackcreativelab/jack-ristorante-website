@@ -243,7 +243,6 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">RÉSERVATION</Button>
             <ThemeSwitcher />
           </div>
         </div>
