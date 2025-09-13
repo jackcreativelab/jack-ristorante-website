@@ -71,10 +71,10 @@ export default function RestaurantMap({ onTableSelect }: { onTableSelect: (table
   };
 
   return (
-    <div className="relative w-full h-[400px] bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
-      <svg className="w-full h-full">
+    <div className="relative w-full bg-white rounded-lg border border-gray-200 p-4 shadow-sm" style={{ paddingBottom: '70%' }}>
+      <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 600 420">
         {/* Walls */}
-        <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" className="fill-none stroke-gray-200 stroke-1" />
+        <rect x="1" y="1" width="598" height="418" className="fill-none stroke-gray-200 stroke-1" />
 
         {/* Bar */}
         <rect x="20" y="20" width="180" height="80" rx="8" className="fill-gray-100" />

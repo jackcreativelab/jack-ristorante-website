@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Phone, Clock, Star, ChefHat, Wine, Utensils, Menu, Filter, X } from "lucide-react"
+import Image from "next/image";
 import { useState, useEffect } from "react"
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -250,11 +251,12 @@ export default function HomePage() {
 
       {/* Hero Section with parallax effect */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-background">
-        <img
+        <Image
           src={`${process.env.NEXT_PUBLIC_BASE_PATH}/pexels-quark-studio-1159039-3201920.jpg`}
           alt="Jack Ristorante Interior"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+          fill
+          style={{ objectFit: "cover", transform: `translateY(${scrollY * 0.5}px)` }}
+          className="absolute inset-0"
         />
         <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
 
@@ -379,16 +381,21 @@ export default function HomePage() {
                 {filterDishes(menuData.antipasti).map((dish, index) => (
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
-                      <img
-                        onClick={() => {
-                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
-                          setCurrentIndex(dishIndex);
-                          setOpen(true);
-                        }}
-                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
-                        alt={dish.name}
-                        className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <div className="relative w-24 h-24">
+                        <Image
+                          onClick={() => {
+                            const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                            setCurrentIndex(dishIndex);
+                            setOpen(true);
+                          }}
+                          src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
+                          alt={dish.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          style={{ objectFit: "cover" }}
+                          className="rounded-lg group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
                       <div className="flex-1">
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="font-semibold text-foreground">{dish.name}</h4>
@@ -427,16 +434,21 @@ export default function HomePage() {
                 {filterDishes(menuData.primi).map((dish, index) => (
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
-                      <img
-                        onClick={() => {
-                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
-                          setCurrentIndex(dishIndex);
-                          setOpen(true);
-                        }}
-                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
-                        alt={dish.name}
-                        className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <div className="relative w-24 h-24">
+                        <Image
+                          onClick={() => {
+                            const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                            setCurrentIndex(dishIndex);
+                            setOpen(true);
+                          }}
+                          src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
+                          alt={dish.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          style={{ objectFit: "cover" }}
+                          className="rounded-lg group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
                       <div className="flex-1">
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="font-semibold text-foreground">{dish.name}</h4>
@@ -475,16 +487,21 @@ export default function HomePage() {
                 {filterDishes(menuData.secondi).map((dish, index) => (
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
-                      <img
-                        onClick={() => {
-                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
-                          setCurrentIndex(dishIndex);
-                          setOpen(true);
-                        }}
-                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
-                        alt={dish.name}
-                        className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <div className="relative w-24 h-24">
+                        <Image
+                          onClick={() => {
+                            const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                            setCurrentIndex(dishIndex);
+                            setOpen(true);
+                          }}
+                          src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
+                          alt={dish.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          style={{ objectFit: "cover" }}
+                          className="rounded-lg group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
                       <div className="flex-1">
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="font-semibold text-foreground">{dish.name}</h4>
@@ -523,16 +540,21 @@ export default function HomePage() {
                 {filterDishes(menuData.dolci).map((dish, index) => (
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
-                      <img
-                        onClick={() => {
-                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
-                          setCurrentIndex(dishIndex);
-                          setOpen(true);
-                        }}
-                        src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
-                        alt={dish.name}
-                        className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <div className="relative w-24 h-24">
+                        <Image
+                          onClick={() => {
+                            const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                            setCurrentIndex(dishIndex);
+                            setOpen(true);
+                          }}
+                          src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
+                          alt={dish.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          style={{ objectFit: "cover" }}
+                          className="rounded-lg group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
                       <div className="flex-1">
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="font-semibold text-foreground">{dish.name}</h4>
@@ -594,11 +616,16 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/elegant-italian-chef-preparing-fresh-pasta-in-mode.jpg`}
-                alt="Chef preparing pasta"
-                className="w-full h-[600px] object-cover rounded-lg shadow-2xl"
-              />
+              <div className="relative w-full h-[600px]">
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/elegant-italian-chef-preparing-fresh-pasta-in-mode.jpg`}
+                  alt="Chef preparing pasta"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: "cover" }}
+                  className="rounded-lg shadow-2xl"
+                />
+              </div>
               <div className="absolute -bottom-6 -left-6 bg-primary text-primary-foreground p-6 rounded-lg shadow-xl">
                 <div className="text-3xl font-bold">15+</div>
                 <div className="text-sm">Années d'Excellence</div>
@@ -645,16 +672,21 @@ export default function HomePage() {
             ].map((dish, index) => (
               <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-card">
                 <div className="relative overflow-hidden rounded-t-lg">
-                  <img
-                    onClick={() => {
-                      const dishIndex = allDishes.findIndex(d => d.name === dish.name);
-                      setCurrentIndex(dishIndex);
-                      setOpen(true);
-                    }}
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
-                    alt={dish.name}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <div className="relative w-full h-64">
+                    <Image
+                      onClick={() => {
+                        const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                        setCurrentIndex(dishIndex);
+                        setOpen(true);
+                      }}
+                      src={`${process.env.NEXT_PUBLIC_BASE_PATH}${dish.image}`}
+                      alt={dish.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      style={{ objectFit: "cover" }}
+                      className="group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                   <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full font-semibold">
                     {dish.price}
                   </div>
@@ -768,11 +800,16 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/elegant-italian-restaurant-exterior-with-stone-fac.jpg`}
-                alt="Jack Ristorante Exterior"
-                className="w-full h-[500px] object-cover rounded-lg shadow-2xl"
-              />
+              <div className="relative w-full h-[500px]">
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/elegant-italian-restaurant-exterior-with-stone-fac.jpg`}
+                  alt="Jack Ristorante Exterior"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: "cover" }}
+                  className="rounded-lg shadow-2xl"
+                />
+              </div>
             </div>
           </div>
         </div>
