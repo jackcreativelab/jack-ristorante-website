@@ -5,6 +5,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Phone, Clock, Star, ChefHat, Wine, Utensils, Menu, Filter, X } from "lucide-react"
 import { useState, useEffect } from "react"
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import RestaurantMap from "@/components/restaurant-map";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const allergens = [
   { id: "gluten", name: "Gluten", icon: "🌾" },
@@ -12,7 +16,6 @@ const allergens = [
   { id: "nuts", name: "Fruits à coque", icon: "🥜" },
   { id: "seafood", name: "Fruits de mer", icon: "🦐" },
   { id: "eggs", name: "Œufs", icon: "🥚" },
-  { id: "soy", name: "Soja", icon: "🫘" },
 ]
 
 const menuData = {
@@ -22,28 +25,36 @@ const menuData = {
       description: "Sélection de charcuteries italiennes, fromages affinés, olives et légumes marinés",
       price: "18€",
       allergens: ["dairy"],
-      image: "italian antipasto platter with cured meats and cheeses",
+      image: "/antipasto-catering-platter-with-bacon-jerky-sausage-blue-cheese-grapes-wooden-table-top-view.jpg",
+      vegetarian: false,
+      vegan: false,
     },
     {
       name: "Burrata di Puglia",
       description: "Burrata crémeuse servie avec tomates cerises, roquette et huile d'olive extra vierge",
       price: "16€",
       allergens: ["dairy"],
-      image: "fresh burrata with cherry tomatoes and arugula",
+      image: "/top-view-mozzarella-cherry-tomatoes-wooden-table.jpg",
+      vegetarian: true,
+      vegan: false,
     },
     {
       name: "Carpaccio di Manzo",
       description: "Fines tranches de bœuf cru, copeaux de parmesan, roquette et citron",
       price: "22€",
       allergens: ["dairy"],
-      image: "beef carpaccio with parmesan shavings and arugula",
+      image: "/top-view-basturma-meat-plate-with-arugula-parmesan-cheese.jpg",
+      vegetarian: false,
+      vegan: false,
     },
     {
       name: "Vitello Tonnato",
       description: "Veau froid tranché finement, sauce au thon et câpres",
       price: "20€",
       allergens: ["eggs", "seafood"],
-      image: "vitello tonnato with tuna sauce and capers",
+      image: "/top-view-chicken-with-cheese-platter-dark-table.jpg",
+      vegetarian: false,
+      vegan: false,
     },
   ],
   primi: [
@@ -52,28 +63,36 @@ const menuData = {
       description: "Spaghetti aux palourdes fraîches, ail, persil et vin blanc",
       price: "24€",
       allergens: ["gluten", "seafood"],
-      image: "spaghetti with fresh clams in white wine sauce",
+      image: "/tasty-appetizing-fresh-homemade-clams-alle-vongole-seafood-pasta-with-garlic-white-wine-plate-closeup.jpg",
+      vegetarian: false,
+      vegan: false,
     },
     {
       name: "Risotto ai Porcini",
       description: "Risotto crémeux aux cèpes, parmesan vieilli et truffe noire",
       price: "28€",
       allergens: ["dairy"],
-      image: "creamy porcini mushroom risotto with truffle",
+      image: "/buckwheat-porridge-with-mushrooms.jpg",
+      vegetarian: true,
+      vegan: false,
     },
     {
       name: "Pappardelle al Cinghiale",
       description: "Pâtes fraîches à la sauce de sanglier braisé et herbes de Toscane",
       price: "26€",
       allergens: ["gluten", "eggs"],
-      image: "fresh pappardelle pasta with wild boar sauce",
+      image: "/tasty-fettuccine-pasta-dish-topped-with-grated-cheese-white-plate.jpg",
+      vegetarian: false,
+      vegan: false,
     },
     {
       name: "Gnocchi alla Sorrentina",
       description: "Gnocchi de pommes de terre, sauce tomate, mozzarella et basilic",
       price: "22€",
       allergens: ["gluten", "dairy", "eggs"],
-      image: "potato gnocchi with tomato sauce and mozzarella",
+      image: "/plate-gnocchi-pasta-tomato-sauce-with-fresh-basil-leaves.jpg",
+      vegetarian: true,
+      vegan: false,
     },
   ],
   secondi: [
@@ -82,28 +101,36 @@ const menuData = {
       description: "Jarret de veau braisé, risotto au safran et gremolata",
       price: "42€",
       allergens: ["dairy"],
-      image: "osso buco with saffron risotto and gremolata",
+      image: "/fried-chicken-breast-sauce-with-parmesan.jpg",
+      vegetarian: false,
+      vegan: false,
     },
     {
       name: "Branzino in Crosta di Sale",
       description: "Bar en croûte de sel, légumes de saison et huile aux herbes",
       price: "38€",
       allergens: ["seafood"],
-      image: "sea bass in salt crust with seasonal vegetables",
+      image: "/raw-fish-composition-cooking.jpg",
+      vegetarian: false,
+      vegan: false,
     },
     {
       name: "Bistecca alla Fiorentina",
       description: "Côte de bœuf grillée (pour 2 personnes), roquette et tomates cerises",
       price: "85€",
       allergens: [],
-      image: "grilled florentine steak with arugula and cherry tomatoes",
+      image: "/high-angle-steak-with-cutlery-salad.jpg",
+      vegetarian: false,
+      vegan: false,
     },
     {
       name: "Scaloppine al Limone",
       description: "Escalopes de veau au citron, épinards sautés à l'ail",
       price: "32€",
       allergens: ["dairy"],
-      image: "veal scaloppine with lemon sauce and sautéed spinach",
+      image: "/seared-tuna-fork-close-up.jpg",
+      vegetarian: false,
+      vegan: false,
     },
   ],
   dolci: [
@@ -112,28 +139,36 @@ const menuData = {
       description: "Notre tiramisu signature aux biscuits imbibés d'espresso et mascarpone",
       price: "14€",
       allergens: ["gluten", "dairy", "eggs"],
-      image: "classic tiramisu with cocoa powder dusting",
+      image: "/high-angle-tiramisu-small-jar.jpg",
+      vegetarian: true,
+      vegan: false,
     },
     {
       name: "Panna Cotta ai Frutti di Bosco",
       description: "Panna cotta vanille, coulis de fruits rouges et biscotti",
       price: "12€",
       allergens: ["dairy", "gluten"],
-      image: "vanilla panna cotta with berry coulis and biscotti",
+      image: "/sangria-senorial-V7-dIKURxK4-unsplash.jpg",
+      vegetarian: true,
+      vegan: false,
     },
     {
       name: "Cannoli Siciliani",
       description: "Cannoli croustillants fourrés à la ricotta et pépites de chocolat",
       price: "13€",
       allergens: ["gluten", "dairy", "eggs"],
-      image: "sicilian cannoli with ricotta and chocolate chips",
+      image: "/karly-gomez-lK1Q5RyD6tc-unsplash.jpg",
+      vegetarian: true,
+      vegan: false,
     },
     {
       name: "Gelato Artigianale",
       description: "Sélection de glaces artisanales (vanille, pistache, stracciatella)",
       price: "10€",
       allergens: ["dairy", "nuts"],
-      image: "artisanal gelato scoops in elegant bowl",
+      image: "/rimsha-noor-p6-O0Cc5RAc-unsplash.jpg",
+      vegetarian: true,
+      vegan: false,
     },
   ],
 }
@@ -142,6 +177,19 @@ export default function HomePage() {
   const [scrollY, setScrollY] = useState(0)
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
   const [showFilters, setShowFilters] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVegetarian, setIsVegetarian] = useState(false);
+  const [isVegan, setIsVegan] = useState(false);
+  const [selectedTable, setSelectedTable] = useState<string | null>(null);
+
+  const handleTableSelect = (tableId: string) => {
+    setSelectedTable(tableId);
+    const requestsTextarea = document.getElementById('requests') as HTMLTextAreaElement;
+    if (requestsTextarea) {
+      requestsTextarea.value = `J'aimerais réserver la table ${tableId}.`;
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -150,8 +198,18 @@ export default function HomePage() {
   }, [])
 
   const filterDishes = (dishes: any[]) => {
-    if (selectedAllergens.length === 0) return dishes
-    return dishes.filter((dish) => !dish.allergens.some((allergen: string) => selectedAllergens.includes(allergen)))
+    return dishes.filter(dish => {
+      if (selectedAllergens.length > 0 && dish.allergens.some((allergen: string) => selectedAllergens.includes(allergen))) {
+        return false;
+      }
+      if (isVegan && !dish.vegan) {
+        return false;
+      }
+      if (isVegetarian && !dish.vegetarian) {
+        return false;
+      }
+      return true;
+    });
   }
 
   const toggleAllergen = (allergenId: string) => {
@@ -159,6 +217,8 @@ export default function HomePage() {
       prev.includes(allergenId) ? prev.filter((id) => id !== allergenId) : [...prev, allergenId],
     )
   }
+
+  const allDishes = [...menuData.antipasti, ...menuData.primi, ...menuData.secondi, ...menuData.dolci];
 
   return (
     <div className="min-h-screen bg-background">
@@ -175,28 +235,29 @@ export default function HomePage() {
                 <a href="#about" className="text-foreground hover:text-primary transition-colors">
                   À PROPOS
                 </a>
-                <a href="#chef" className="text-foreground hover:text-primary transition-colors">
-                  CHEF
-                </a>
                 <a href="#contact" className="text-foreground hover:text-primary transition-colors">
                   CONTACT
+                </a>
+                <a href="#reservation" className="text-foreground hover:text-primary transition-colors">
+                  RÉSERVATION
                 </a>
               </div>
             </div>
             <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">RÉSERVATION</Button>
+            <ThemeSwitcher />
           </div>
         </div>
       </nav>
 
       {/* Hero Section with parallax effect */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-background">
         <img
-          src="/elegant-italian-restaurant-interior-with-warm-ligh.jpg"
+          src="/pexels-quark-studio-1159039-3201920.jpg"
           alt="Jack Ristorante Interior"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ transform: `translateY(${scrollY * 0.5}px)` }}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
 
         <div
           className="relative z-20 text-center max-w-4xl mx-auto px-4 transition-all duration-1000"
@@ -207,27 +268,27 @@ export default function HomePage() {
         >
           <div className="mb-6">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/30 backdrop-blur-sm rounded-full mb-4">
-              <ChefHat className="w-8 h-8 text-white" />
+              <ChefHat className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
-          <h1 className="text-6xl md:text-8xl font-light mb-6 text-balance text-white">
+          <h1 className="text-6xl md:text-8xl font-light mb-6 text-balance text-primary-foreground">
             {"Bienvenue chez"}
             <br />
             <span className="font-bold text-primary">Jack Ristorante</span>
           </h1>
-          <p className="text-xl md:text-2xl font-light mb-8 text-pretty max-w-2xl mx-auto text-white">
+          <p className="text-xl md:text-2xl font-light mb-8 text-pretty max-w-2xl mx-auto text-primary-foreground">
             Cuisine italienne authentique préparée avec passion, servie dans une atmosphère d'élégance raffinée
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
-              VOIR LA CARTE
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3" asChild>
+              <a href="#menu">VOIR LA CARTE</a>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 bg-transparent"
+              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-background px-8 py-3 bg-transparent" asChild
             >
-              RÉSERVER
+              <a href="#reservation">RÉSERVER</a>
             </Button>
           </div>
         </div>
@@ -285,6 +346,25 @@ export default function HomePage() {
                 )}
               </div>
             )}
+
+            <div className="flex flex-wrap gap-3 justify-center mb-4">
+              <Button
+                onClick={() => setIsVegetarian(!isVegetarian)}
+                variant={isVegetarian ? "default" : "outline"}
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <span> Végétarien</span>
+              </Button>
+              <Button
+                onClick={() => setIsVegan(!isVegan)}
+                variant={isVegan ? "default" : "outline"}
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <span> Vegan</span>
+              </Button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -301,7 +381,12 @@ export default function HomePage() {
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
                       <img
-                        src={`/abstract-geometric-shapes.png?key=ydpca&height=100&width=100&query=${dish.image}`}
+                        onClick={() => {
+                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                          setCurrentIndex(dishIndex);
+                          setOpen(true);
+                        }}
+                        src={dish.image}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -317,7 +402,7 @@ export default function HomePage() {
                             return allergen ? (
                               <span
                                 key={allergenId}
-                                className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full"
+                                className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full"
                               >
                                 {allergen.icon} {allergen.name}
                               </span>
@@ -344,7 +429,12 @@ export default function HomePage() {
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
                       <img
-                        src={`/abstract-geometric-shapes.png?key=4x24m&height=100&width=100&query=${dish.image}`}
+                        onClick={() => {
+                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                          setCurrentIndex(dishIndex);
+                          setOpen(true);
+                        }}
+                        src={dish.image}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -360,7 +450,7 @@ export default function HomePage() {
                             return allergen ? (
                               <span
                                 key={allergenId}
-                                className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full"
+                                className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full"
                               >
                                 {allergen.icon} {allergen.name}
                               </span>
@@ -387,7 +477,12 @@ export default function HomePage() {
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
                       <img
-                        src={`/abstract-geometric-shapes.png?key=n6625&height=100&width=100&query=${dish.image}`}
+                        onClick={() => {
+                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                          setCurrentIndex(dishIndex);
+                          setOpen(true);
+                        }}
+                        src={dish.image}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -403,7 +498,7 @@ export default function HomePage() {
                             return allergen ? (
                               <span
                                 key={allergenId}
-                                className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full"
+                                className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full"
                               >
                                 {allergen.icon} {allergen.name}
                               </span>
@@ -430,7 +525,12 @@ export default function HomePage() {
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-card/50">
                     <div className="flex gap-4 p-4">
                       <img
-                        src={`/abstract-geometric-shapes.png?key=4ucw3&height=100&width=100&query=${dish.image}`}
+                        onClick={() => {
+                          const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                          setCurrentIndex(dishIndex);
+                          setOpen(true);
+                        }}
+                        src={dish.image}
                         alt={dish.name}
                         className="w-24 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                       />
@@ -446,7 +546,7 @@ export default function HomePage() {
                             return allergen ? (
                               <span
                                 key={allergenId}
-                                className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full"
+                                className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full"
                               >
                                 {allergen.icon} {allergen.name}
                               </span>
@@ -461,12 +561,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="text-center mt-16">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
-              <Menu className="w-4 h-4 mr-2" />
-              Télécharger la Carte Complète
-            </Button>
-          </div>
+          
         </div>
       </section>
 
@@ -534,25 +629,30 @@ export default function HomePage() {
                 name: "Risotto ai Porcini",
                 description: "Riz Arborio crémeux aux cèpes sauvages et Parmigiano-Reggiano vieilli",
                 price: "28€",
-                image: "elegant plated risotto with porcini mushrooms and parmesan",
+                image: "/buckwheat-porridge-with-mushrooms.jpg",
               },
               {
                 name: "Osso Buco alla Milanese",
                 description: "Jarret de veau braisé lentement avec risotto au safran et gremolata",
                 price: "42€",
-                image: "traditional osso buco with saffron risotto on elegant white plate",
+                image: "/fried-chicken-breast-sauce-with-parmesan.jpg",
               },
               {
                 name: "Tiramisu della Casa",
                 description: "Notre tiramisu signature aux biscuits imbibés d'espresso et mascarpone",
                 price: "14€",
-                image: "elegant tiramisu dessert with cocoa powder dusting",
+                image: "/high-angle-tiramisu-small-jar.jpg",
               },
             ].map((dish, index) => (
               <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-card">
                 <div className="relative overflow-hidden rounded-t-lg">
                   <img
-                    src={`/abstract-geometric-shapes.png?key=d8jgc&height=300&width=400&query=${dish.image}`}
+                    onClick={() => {
+                      const dishIndex = allDishes.findIndex(d => d.name === dish.name);
+                      setCurrentIndex(dishIndex);
+                      setOpen(true);
+                    }}
+                    src={dish.image}
                     alt={dish.name}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -566,6 +666,60 @@ export default function HomePage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Reservation Section */}
+      <section id="reservation" className="py-20 bg-card">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Réservation</Badge>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-balance">
+              Réservez votre <span className="font-bold text-primary">Table</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Nous vous recommandons de réserver à l'avance pour vous garantir une table.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <RestaurantMap onTableSelect={handleTableSelect} />
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nom</label>
+                <input type="text" id="name" placeholder="Votre nom" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
+                <input type="email" id="email" placeholder="Votre email" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="phone" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Téléphone</label>
+                <input type="tel" id="phone" placeholder="Votre téléphone" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="guests" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nombre de convives</label>
+                <input type="number" id="guests" placeholder="2" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="date" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Date</label>
+                <input type="date" id="date" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="time" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Heure</label>
+                <input type="time" id="time" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+              </div>
+              <div className="md:col-span-2 space-y-2">
+                <label htmlFor="requests" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Demandes spéciales (table préférée, etc.)</label>
+                <textarea id="requests" placeholder="Faites-nous part de vos préférences" className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
+              </div>
+              <div className="md:col-span-2 text-center">
+                <Button type="submit" size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
+                  Envoyer la demande de réservation
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -613,13 +767,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-8">
-                <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-                  <Utensils className="w-4 h-4 mr-2" />
-                  Réserver une Table
-                </Button>
-              </div>
             </div>
             <div className="relative">
               <img
@@ -648,6 +795,14 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        slides={allDishes.map(dish => ({ src: dish.image, title: dish.name, description: dish.description }))}
+        index={currentIndex}
+      />
+
     </div>
   )
 }
